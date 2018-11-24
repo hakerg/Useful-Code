@@ -4,7 +4,7 @@
 #include "Randomizable.h"
 #include "GraphNode.h"
 
-template <class NumType = double> class AINeuron :
+template <class NumType = double> class Neuron :
 	public DataTransformer<NumType, NumType>,
 	public Randomizable,
 	public GraphNode
@@ -18,10 +18,10 @@ public:
 
 
 
-	AINeuron() {}
-	AINeuron(NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
+	Neuron() {}
+	Neuron(NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
 		: ActivationFunction(activationFunction), DerivativeFunction(derivativeFunction) {}
-	~AINeuron() {}
+	~Neuron() {}
 
 
 	static NumType Sigmoid(NumType input) // (-oo, oo) -> (0, 1)

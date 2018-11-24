@@ -3,7 +3,7 @@
 #include "Randomizable.h"
 #include "GraphOneWayConnection.h"
 
-template <class NumType = double> class AISynapse :
+template <class NumType = double> class Synapse :
 	public DataTransformer<NumType, NumType>,
 	public Randomizable,
 	public GraphOneWayConnection
@@ -13,8 +13,8 @@ public:
 	NumType Weight;
 
 
-	AISynapse(NumType weight, void * target) : Weight(weight), GraphOneWayConnection(target) {}
-	~AISynapse() {}
+	Synapse(NumType weight, void * target) : Weight(weight), GraphOneWayConnection(target) {}
+	~Synapse() {}
 
 	// Odziedziczono za poœrednictwem elementu DataTransformer
 	virtual NumType GetOutput(const NumType & input) override

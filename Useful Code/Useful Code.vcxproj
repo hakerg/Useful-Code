@@ -19,34 +19,55 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AISynapse.cpp" />
+    <ClCompile Include="Synapse.cpp" />
+    <ClCompile Include="Applicator.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Mesh2D.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="SimilarityDeterminer.cpp" />
     <ClCompile Include="DataTransformer.cpp" />
-    <ClCompile Include="AINeuron.cpp" />
-    <ClCompile Include="AIRandomTree.cpp" />
+    <ClCompile Include="Neuron.cpp" />
+    <ClCompile Include="RandomTree.cpp" />
     <ClCompile Include="AsynchronousLoop.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="FullDataTransformer.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphNode.cpp" />
     <ClCompile Include="GraphOneWayConnection.cpp" />
     <ClCompile Include="Randomizable.cpp" />
+    <ClCompile Include="Figure2D.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="Transformation2D.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AISynapse.h" />
+    <ClInclude Include="Synapse.h" />
+    <ClInclude Include="Applicator.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Mesh2D.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="SimilarityDeterminer.h" />
     <ClInclude Include="DataTransformer.h" />
-    <ClInclude Include="AINeuron.h" />
-    <ClInclude Include="AIRandomTree.h" />
+    <ClInclude Include="Neuron.h" />
+    <ClInclude Include="RandomTree.h" />
     <ClInclude Include="AsynchronousLoop.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="FullDataTransformer.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphNode.h" />
     <ClInclude Include="GraphOneWayConnection.h" />
     <ClInclude Include="Randomizable.h" />
+    <ClInclude Include="Figure2D.h" />
+    <ClInclude Include="Square.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
