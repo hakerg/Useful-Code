@@ -21,7 +21,7 @@ public:
 	Neuron() {}
 	Neuron(NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
 		: ActivationFunction(activationFunction), DerivativeFunction(derivativeFunction) {}
-	~Neuron() {}
+	virtual ~Neuron() {}
 
 
 	static NumType Sigmoid(NumType input) // (-oo, oo) -> (0, 1)
@@ -47,7 +47,7 @@ public:
 	}
 
 	// Odziedziczono za poœrednictwem elementu DataTransformer
-	virtual NumType GetOutput(const NumType & input) override
+	virtual NumType GetOutput(const NumType & input) const override
 	{
 		return ActivationFunction(input) + OutputBias;
 	}

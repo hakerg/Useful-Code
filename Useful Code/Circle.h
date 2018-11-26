@@ -15,14 +15,14 @@ public:
 
 
 	Circle(const Vector2D<NumType> & center, double radius) : Center(center), Radius(radius) {}
-	~Circle() {}
+	virtual ~Circle() {}
 
 	// Odziedziczono za poœrednictwem elementu Shape2D
-	virtual bool IsInside(const Vector2D<NumType>& point) override { return Vector2D<NumType>(Center, point).GetLength() < Radius; }
-	virtual bool IsOnBorder(const Vector2D<NumType>& point) override { return Vector2D<NumType>(Center, point).GetLength() == Radius; }
-	virtual bool IsOver(const Vector2D<NumType>& point) override { return Vector2D<NumType>(Center, point).GetLength() <= Radius; }
+	virtual bool IsInside(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() < Radius; }
+	virtual bool IsOnBorder(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() == Radius; }
+	virtual bool IsOver(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() <= Radius; }
 
-	virtual double GetArea() override { return Pi * Radius * Radius; }
-	virtual double GetCircumference() override { Pi2 * Radius; }
+	virtual NumType GetArea() const override { return Pi * Radius * Radius; }
+	virtual NumType GetCircumference() const override { Pi2 * Radius; }
 };
 

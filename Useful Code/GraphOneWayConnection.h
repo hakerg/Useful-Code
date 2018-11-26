@@ -6,6 +6,6 @@ public:
 	void* Target;
 
 	GraphOneWayConnection(void* target);
-	~GraphOneWayConnection();
+	virtual ~GraphOneWayConnection();
 };
 

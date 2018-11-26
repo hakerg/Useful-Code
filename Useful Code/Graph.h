@@ -11,6 +11,6 @@ public:
 
 
 	Graph();
-	~Graph();
+	virtual ~Graph();
 };
 

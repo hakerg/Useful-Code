@@ -13,26 +13,26 @@ public:
 
 
 	Square(const Vector2D<NumType> & center, NumType halfSide) : Center(center), HalfSide(halfSide) {}
-	~Square() {}
+	virtual ~Square() {}
 
 	// Odziedziczono za poœrednictwem elementu Shape2D
-	virtual bool IsInside(const Vector2D<NumType>& point) override
+	virtual bool IsInside(const Vector2D<NumType>& point) const override
 	{
 		return abs(point.X - Center.X) < HalfSide && abs(point.Y - Center.Y) < HalfSide;
 	}
-	virtual bool IsOnBorder(const Vector2D<NumType>& point) override
+	virtual bool IsOnBorder(const Vector2D<NumType>& point) const override
 	{
 		return abs(point.X - Center.X) == HalfSide && abs(point.Y - Center.Y) == HalfSide;
 	}
-	virtual bool IsOver(const Vector2D<NumType>& point) override
+	virtual bool IsOver(const Vector2D<NumType>& point) const override
 	{
 		return abs(point.X - Center.X) <= HalfSide && abs(point.Y - Center.Y) <= HalfSide;
 	}
-	virtual NumType GetArea() override
+	virtual NumType GetArea() const override
 	{
 		return HalfSide * HalfSide * 4;
 	}
-	virtual NumType GetCircumference() override
+	virtual NumType GetCircumference() const override
 	{
 		return HalfSide * 8;
 	}

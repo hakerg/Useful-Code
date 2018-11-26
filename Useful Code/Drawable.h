@@ -3,8 +3,8 @@ class Drawable
 {
 public:
 	Drawable();
-	~Drawable();
+	virtual ~Drawable();
 
-	virtual void Draw() = 0;
+	virtual void Draw() const = 0;
 };
 

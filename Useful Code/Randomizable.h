@@ -5,7 +5,7 @@ class Randomizable
 {
 public:
 	Randomizable();
-	~Randomizable();
+	virtual ~Randomizable();
 
 	virtual void Randomize() = 0;
 	static double GetRandom();

@@ -5,13 +5,13 @@ template <class NumType = double> class Figure2D
 {
 public:
 	Figure2D() {}
-	~Figure2D() {}
+	virtual ~Figure2D() {}
 
-	virtual bool IsInside(const Vector2D<NumType> & point) = 0;
-	virtual bool IsOnBorder(const Vector2D<NumType> & point) = 0;
-	virtual bool IsOver(const Vector2D<NumType> & point) = 0;
+	virtual bool IsInside(const Vector2D<NumType> & point) const = 0;
+	virtual bool IsOnBorder(const Vector2D<NumType> & point) const = 0;
+	virtual bool IsOver(const Vector2D<NumType> & point) const = 0;
 
-	virtual NumType GetArea() = 0;
-	virtual NumType GetCircumference() = 0;
+	virtual NumType GetArea() const = 0;
+	virtual NumType GetCircumference() const = 0;
 };
 

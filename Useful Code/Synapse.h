@@ -14,10 +14,10 @@ public:
 
 
 	Synapse(NumType weight, void * target) : Weight(weight), GraphOneWayConnection(target) {}
-	~Synapse() {}
+	virtual ~Synapse() {}
 
 	// Odziedziczono za poœrednictwem elementu DataTransformer
-	virtual NumType GetOutput(const NumType & input) override
+	virtual NumType GetOutput(const NumType & input) const override
 	{
 		return input * Weight;
 	}

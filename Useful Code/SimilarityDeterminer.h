@@ -3,8 +3,8 @@ template <class Type, class NumType = double> class SimilarityDeterminer
 {
 public:
 	SimilarityDeterminer() {}
-	~SimilarityDeterminer() {}
+	virtual ~SimilarityDeterminer() {}
 
-	virtual NumType GetSimilarityScale(const Type & a, const Type & b) = 0; // <0, 1>
+	virtual NumType GetSimilarityScale(const Type & a, const Type & b) const = 0; // <0, 1>
 };
 

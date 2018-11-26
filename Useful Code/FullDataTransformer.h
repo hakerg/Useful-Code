@@ -11,10 +11,10 @@ public:
 
 	FullDataTransformer(DataTransformer<DataType, TransformedDataType> * transformer, DataTransformer<TransformedDataType, DataType> * reverseTransformer)
 		: Transformer(transformer), ReverseTransformer(reverseTransformer) {}
-	~FullDataTransformer() {}
+	virtual ~FullDataTransformer() {}
 
 	// Odziedziczono za poœrednictwem elementu DataTransformer
-	virtual DataType GetOutput(const DataType & input) override
+	virtual DataType GetOutput(const DataType & input) const override
 	{
 		return ReverseTransformer->GetOutput(Transformer->GetOutput(input));
 	}

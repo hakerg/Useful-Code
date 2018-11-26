@@ -9,6 +9,6 @@ public:
 	std::vector <std::shared_ptr<GraphOneWayConnection>> outputConnections;
 
 	GraphNode();
-	~GraphNode();
+	virtual ~GraphNode();
 };
 

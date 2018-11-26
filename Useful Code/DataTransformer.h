@@ -4,8 +4,8 @@ template <class InputType, class OutputType> class DataTransformer
 {
 public:
 	DataTransformer() {}
-	~DataTransformer() {}
+	virtual ~DataTransformer() {}
 
-	virtual OutputType GetOutput(const InputType & input) = 0;
+	virtual OutputType GetOutput(const InputType & input) const = 0;
 
 };

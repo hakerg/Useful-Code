@@ -1,25 +1,34 @@
 #include <iostream>
 #include <Windows.h>
-#include "AINeuralNetwork.h"
+#include "RealtimeAnimation.h"
+
+class TestAnimation : public Animatable
+{
+	int id = 0;
+
+	// Odziedziczono za poœrednictwem elementu Animatable
+	virtual void Draw() const override
+	{
+		std::cout << "Frame #" << id << std::endl;
+	}
+	virtual std::shared_ptr<Animatable> GetNextFrame() const override
+	{
+		if (id == 10) return GetNullFrame();
+
+		std::shared_ptr<TestAnimation> nextFrame(new TestAnimation(*this));
+		nextFrame->id++;
+		return nextFrame;
+	}
+};
+
 
 int main()
 {
-	AINeuralNetwork<3, 3> network(std::vector<int>({ 3 }), AINeuron<>());
+	RealtimeAnimation runner;
 
-	std::array<double, 3> input;
-	for (auto& i : input) i = Randomizable::GetRandom(-1.0, 1.0);
-
-	while (true)
-	{
-
-		network.Teach(input, input, 0.1);
-
-		auto output = network.GetOutput(input);
-
-		for (auto& o : output) std::cout << o << ", ";
-		std::cout << std::endl;
-
-	}
+	std::shared_ptr<Animatable> animation(new TestAnimation());
+	runner.Run(animation, 100);
+	runner.Run(animation, 1000);
 
 
 	std::cout << std::endl;

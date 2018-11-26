@@ -9,35 +9,51 @@ template <class AIInputType, class AITurnType> class RandomTree :
 {
 public:
 
-	int MaxSteps;
+	unsigned MaxSteps;
 	Applicator<AIInputType, AITurnType> * Simulator;
 
 
-	RandomTree(int maxSteps, Applicator<AIInputType, AITurnType> * simulator) :
+	RandomTree(unsigned maxSteps, Applicator<AIInputType, AITurnType> * simulator) :
 		MaxSteps(maxSteps), Simulator(simulator) {}
-	~RandomTree() {}
+	virtual ~RandomTree() {}
 
 
-	virtual std::vector<AITurnType> GetTurnsToCheck(const AIInputType & input) = 0;
+	virtual std::vector<AITurnType> GetTurnsToCheck(const AIInputType & input) const = 0;
 
 
-	AIInputType GetFinalInput(const AIInputType & initInput, int steps)
+	AIInputType GetFinalInput(const AIInputType & initInput, unsigned steps) const
 	{
 
 		steps--;
 
 		auto turns = GetTurnsToCheck(initInput);
-		int turnsCount = turns.size();
+		unsigned turnsCount = turns.size();
 
-		auto finalInput = Simulator->GetApplied(initInput, turns[0]);
-		if (steps > 0) finalInput = GetFinalInput(finalInput, steps);
+		auto finalInput = Simulator->GetApplied(initInput, turns.front());
 
-		for (int n = 1; n < turnsCount; n++)
+		if (steps > 0U)
 		{
-			auto tempFinalInput = Simulator->GetApplied(initInput, turns[n]);
-			if (steps > 0) tempFinalInput = GetFinalInput(tempFinalInput, steps);
 
-			if (finalInput < tempFinalInput) finalInput = tempFinalInput; // define operator < to determine, which one has higher fitness
+			finalInput = GetFinalInput(finalInput, steps);
+			for (unsigned n = 1; n < turnsCount; n++)
+			{
+				auto tempFinalInput = Simulator->GetApplied(initInput, turns[n]);
+				tempFinalInput = GetFinalInput(tempFinalInput, steps);
+
+				if (finalInput < tempFinalInput) finalInput = tempFinalInput; // define operator < to determine, which one has higher fitness
+			}
+
+		}
+		else
+		{
+
+			for (unsigned n = 1; n < turnsCount; n++)
+			{
+				auto tempFinalInput = Simulator->GetApplied(initInput, turns[n]);
+
+				if (finalInput < tempFinalInput) finalInput = tempFinalInput; // define operator < to determine, which one has higher fitness
+			}
+
 		}
 
 		return finalInput;
@@ -45,29 +61,50 @@ public:
 
 
 	// Odziedziczono za poœrednictwem elementu AI
-	virtual AITurnType GetOutput(const AIInputType & input) override
+	virtual AITurnType GetOutput(const AIInputType & input) const override
 	{
-
-		int steps = MaxSteps - 1;
+		
+		unsigned steps = MaxSteps - 1;
 
 		auto turns = GetTurnsToCheck(input);
-		int turnsCount = turns.size();
+		unsigned turnsCount = turns.size();
 
 		auto& turn = turns[0];
 		auto finalInput = Simulator->GetApplied(input, turn);
-		if (steps > 0) finalInput = GetFinalInput(finalInput, steps);
-
-		for (int n = 1; n < turnsCount; n++)
+		if (steps > 0U)
 		{
-			auto& tempTurn = turns[n];
-			auto tempFinalInput = Simulator->GetApplied(input, tempTurn);
-			if (steps > 0) tempFinalInput = GetFinalInput(tempFinalInput, steps);
 
-			if (finalInput < tempFinalInput) // define operator < to determine, which one has higher fitness
+			finalInput = GetFinalInput(finalInput, steps);
+
+			for (unsigned n = 1; n < turnsCount; n++)
 			{
-				finalInput = tempFinalInput;
-				turn = tempTurn;
+				auto& tempTurn = turns[n];
+				auto tempFinalInput = Simulator->GetApplied(input, tempTurn);
+				tempFinalInput = GetFinalInput(tempFinalInput, steps);
+
+				if (finalInput < tempFinalInput) // define operator < to determine, which one has higher fitness
+				{
+					finalInput = tempFinalInput;
+					turn = tempTurn;
+				}
 			}
+
+		}
+		else
+		{
+
+			for (unsigned n = 1; n < turnsCount; n++)
+			{
+				auto& tempTurn = turns[n];
+				auto tempFinalInput = Simulator->GetApplied(input, tempTurn);
+
+				if (finalInput < tempFinalInput) // define operator < to determine, which one has higher fitness
+				{
+					finalInput = tempFinalInput;
+					turn = tempTurn;
+				}
+			}
+
 		}
 
 		return turn;
