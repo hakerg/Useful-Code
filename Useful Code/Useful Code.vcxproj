@@ -19,9 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animatable.cpp" />
-    <ClCompile Include="RealtimeAnimation.cpp" />
-    <ClCompile Include="ThreadLoop.cpp">
+    <ClCompile Include="AllegroWindow.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="DrawableTransparently.cpp" />
+    <ClCompile Include="DrawTarget.cpp" />
+    <ClCompile Include="GUIElement.cpp" />
+    <ClCompile Include="LoopedThread.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -29,34 +32,37 @@
     </ClCompile>
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="GraphNode.cpp" />
-    <ClCompile Include="GraphOneWayConnection.cpp" />
+    <ClCompile Include="LoopedThreadGroup.cpp" />
     <ClCompile Include="Randomizable.cpp" />
-    <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="_Tester.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animatable.h" />
-    <ClInclude Include="RealtimeAnimation.h" />
+    <ClInclude Include="AllegroWindow.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="DrawableTransparently.h" />
+    <ClInclude Include="DrawTarget.h" />
+    <ClInclude Include="GUIElement.h" />
+    <ClInclude Include="LoopedThreadGroup.h" />
+    <ClInclude Include="Math defines.h" />
     <ClInclude Include="Synapse.h" />
-    <ClInclude Include="Applicator.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Mesh2D.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="SimilarityDeterminer.h" />
     <ClInclude Include="DataTransformer.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="RandomTree.h" />
-    <ClInclude Include="ThreadLoop.h" />
+    <ClInclude Include="LoopedThread.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="FullDataTransformer.h" />
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="GraphNode.h" />
-    <ClInclude Include="GraphOneWayConnection.h" />
     <ClInclude Include="Randomizable.h" />
     <ClInclude Include="Figure2D.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="ThreadDataQueue.h" />
     <ClInclude Include="Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -109,7 +115,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_LibraryType>StaticMonolithRelease</Allegro_LibraryType>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -118,6 +131,9 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -141,6 +157,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,5 +177,14 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets" Condition="Exists('..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets')" />
+    <Import Project="..\packages\Allegro.5.2.4.0\build\native\Allegro.targets" Condition="Exists('..\packages\Allegro.5.2.4.0\build\native\Allegro.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ten projekt zawiera odwołania do pakietów NuGet, których nie ma na tym komputerze. Użyj przywracania pakietów NuGet, aby je pobrać. Aby uzyskać więcej informacji, zobacz http://go.microsoft.com/fwlink/?LinkID=322105. Brakujący plik: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AllegroDeps.1.7.0.0\build\native\AllegroDeps.targets'))" />
+    <Error Condition="!Exists('..\packages\Allegro.5.2.4.0\build\native\Allegro.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Allegro.5.2.4.0\build\native\Allegro.targets'))" />
+  </Target>
 </Project>

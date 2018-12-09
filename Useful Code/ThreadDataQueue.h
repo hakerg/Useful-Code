@@ -15,55 +15,87 @@ public:
 
 	ThreadDataQueue(unsigned maxSize) : MaxSize(maxSize) {}
 	virtual ~ThreadDataQueue() {}
-
+	
 
 	bool TryPush(const T & value)
 	{
-		queueMutex.lock();
 
-		bool free = queue.size() < MaxSize;
-		if (free) queue.push(value);
+		auto free = (queue.size() < MaxSize);
+		if (free)
+		{
+			queueMutex.lock();
+			queue.push(value);
+			queueMutex.unlock();
+		}
 		
-		queueMutex.unlock();
 		return free;
 	}
 
 
-	T Pop()
+	void ForcePush(const T & value)
+	{
+		queueMutex.lock();
+		queue.push(value);
+		while (queue.size() > MaxSize) queue.pop();
+
+		queueMutex.unlock();
+
+	}
+
+
+	bool TryPop()
 	{
 		queueMutex.lock();
 
-		T ret = queue.front();
-		queue.pop();
+		bool ret = queue.size();
+		if (ret)
+		{
+			queue.pop();
+		}
+
+		queueMutex.unlock();
+		return ret;
+	}
+
+	bool TryPop(T & output)
+	{
+		queueMutex.lock();
+
+		bool ret = queue.size();
+		if (ret)
+		{
+			output = queue.front();
+			queue.pop();
+		}
+
+		queueMutex.unlock();
+		return ret;
+	}
+
+	T & Front()
+	{
+		queueMutex.lock();
+
+		T & ret = queue.front();
 
 		queueMutex.unlock();
 		return ret;
 	}
 
 	
-	bool Empty()
+	bool Empty() const
 	{
-		queueMutex.lock();
-
-		bool ret = queue.empty();
-
-		queueMutex.unlock();
-		return ret;
+		return queue.empty();
 	}
 
 
-	unsigned Size()
+	unsigned Size() const
 	{
-		queueMutex.lock();
-
-		unsigned ret = queue.size();
-
-		queueMutex.unlock();
-		return ret;
+		return queue.size();
 	}
 
 
-	bool Full()
+	bool Full() const
 	{
 		return Size() >= MaxSize;
 	}

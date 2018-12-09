@@ -2,7 +2,7 @@
 #include <cmath>
 #include "DataTransformer.h"
 #include "Randomizable.h"
-#include "GraphNode.h"
+#include "Graph.h"
 
 template <class NumType = double> class Neuron :
 	public DataTransformer<NumType, NumType>,
@@ -18,9 +18,9 @@ public:
 
 
 
-	Neuron() {}
-	Neuron(NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
-		: ActivationFunction(activationFunction), DerivativeFunction(derivativeFunction) {}
+	Neuron(Graph * const parentGraph) : GraphNode(parentGraph) {}
+	Neuron(Graph * const parentGraph, NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
+		: GraphNode(parentGraph), ActivationFunction(activationFunction), DerivativeFunction(derivativeFunction) {}
 	virtual ~Neuron() {}
 
 

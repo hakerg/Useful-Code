@@ -1,6 +1,5 @@
 #pragma once
 #include "DataTransformer.h"
-#include "Applicator.h"
 #include <vector>
 #include <utility>
 
@@ -10,15 +9,16 @@ template <class AIInputType, class AITurnType> class RandomTree :
 public:
 
 	unsigned MaxSteps;
-	Applicator<AIInputType, AITurnType> * Simulator;
 
 
-	RandomTree(unsigned maxSteps, Applicator<AIInputType, AITurnType> * simulator) :
-		MaxSteps(maxSteps), Simulator(simulator) {}
+	RandomTree(unsigned maxSteps) :
+		MaxSteps(maxSteps) {}
 	virtual ~RandomTree() {}
 
 
 	virtual std::vector<AITurnType> GetTurnsToCheck(const AIInputType & input) const = 0;
+
+	virtual AIInputType GetNextInput(const AIInputType & input, const AITurnType & turn) const = 0;
 
 
 	AIInputType GetFinalInput(const AIInputType & initInput, unsigned steps) const
@@ -29,7 +29,7 @@ public:
 		auto turns = GetTurnsToCheck(initInput);
 		unsigned turnsCount = turns.size();
 
-		auto finalInput = Simulator->GetApplied(initInput, turns.front());
+		auto finalInput = GetNextInput(initInput, turns.front());
 
 		if (steps > 0U)
 		{
@@ -37,7 +37,7 @@ public:
 			finalInput = GetFinalInput(finalInput, steps);
 			for (unsigned n = 1; n < turnsCount; n++)
 			{
-				auto tempFinalInput = Simulator->GetApplied(initInput, turns[n]);
+				auto tempFinalInput = GetNextInput(initInput, turns[n]);
 				tempFinalInput = GetFinalInput(tempFinalInput, steps);
 
 				if (finalInput < tempFinalInput) finalInput = tempFinalInput; // define operator < to determine, which one has higher fitness
@@ -49,7 +49,7 @@ public:
 
 			for (unsigned n = 1; n < turnsCount; n++)
 			{
-				auto tempFinalInput = Simulator->GetApplied(initInput, turns[n]);
+				auto tempFinalInput = GetNextInput(initInput, turns[n]);
 
 				if (finalInput < tempFinalInput) finalInput = tempFinalInput; // define operator < to determine, which one has higher fitness
 			}
@@ -70,7 +70,7 @@ public:
 		unsigned turnsCount = turns.size();
 
 		auto& turn = turns[0];
-		auto finalInput = Simulator->GetApplied(input, turn);
+		auto finalInput = GetNextInput(input, turn);
 		if (steps > 0U)
 		{
 
@@ -79,7 +79,7 @@ public:
 			for (unsigned n = 1; n < turnsCount; n++)
 			{
 				auto& tempTurn = turns[n];
-				auto tempFinalInput = Simulator->GetApplied(input, tempTurn);
+				auto tempFinalInput = GetNextInput(input, tempTurn);
 				tempFinalInput = GetFinalInput(tempFinalInput, steps);
 
 				if (finalInput < tempFinalInput) // define operator < to determine, which one has higher fitness
@@ -96,7 +96,7 @@ public:
 			for (unsigned n = 1; n < turnsCount; n++)
 			{
 				auto& tempTurn = turns[n];
-				auto tempFinalInput = Simulator->GetApplied(input, tempTurn);
+				auto tempFinalInput = GetNextInput(input, tempTurn);
 
 				if (finalInput < tempFinalInput) // define operator < to determine, which one has higher fitness
 				{

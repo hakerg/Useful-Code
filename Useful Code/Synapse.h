@@ -1,7 +1,7 @@
 #pragma once
 #include "DataTransformer.h"
 #include "Randomizable.h"
-#include "GraphOneWayConnection.h"
+#include "Graph.h"
 
 template <class NumType = double> class Synapse :
 	public DataTransformer<NumType, NumType>,
@@ -13,7 +13,7 @@ public:
 	NumType Weight;
 
 
-	Synapse(NumType weight, void * target) : Weight(weight), GraphOneWayConnection(target) {}
+	Synapse(NumType weight, std::shared_ptr<GraphNode> target) : Weight(weight), GraphOneWayConnection(target) {}
 	virtual ~Synapse() {}
 
 	// Odziedziczono za poœrednictwem elementu DataTransformer

@@ -1,16 +1,41 @@
 #pragma once
 #include <list>
 #include <memory>
-#include "GraphNode.h"
 
-class Graph
+
+class Graph;
+class GraphNode;
+class GraphOneWayConnection;
+
+
+class Graph : public std::list<std::shared_ptr<GraphNode>>
 {
 public:
-
-	std::list<std::shared_ptr<GraphNode>> Nodes;
-
-
 	Graph();
 	virtual ~Graph();
+};
+
+
+
+class GraphNode
+{
+public:
+	std::list <std::shared_ptr<GraphOneWayConnection>> outputConnections;
+
+	Graph * const ParentGraph;
+
+	GraphNode(Graph * const parentGraph);
+	virtual ~GraphNode();
+};
+
+
+
+class GraphOneWayConnection
+{
+public:
+	std::shared_ptr<GraphNode> Target;
+
+	GraphOneWayConnection(std::shared_ptr<GraphNode> target);
+	virtual ~GraphOneWayConnection();
 };
 
