@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,47 +19,71 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AllegroBitmap.cpp" />
     <ClCompile Include="AllegroWindow.cpp" />
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="DrawableTransparently.cpp" />
-    <ClCompile Include="DrawTarget.cpp" />
-    <ClCompile Include="GUIElement.cpp" />
+    <ClCompile Include="AnimationExponential.cpp" />
+    <ClCompile Include="AnimationLinear.cpp" />
+    <ClCompile Include="AnimationSine.cpp" />
+    <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="DirectedGraph.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
+    <ClCompile Include="NeuronLinear.cpp" />
+    <ClCompile Include="NeuronSigmoid.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="TimeDependent.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="LoopedThread.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\DELL\source\repos\boost_1_67_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Drawable.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="LoopedThreadGroup.cpp" />
+    <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="Randomizable.cpp" />
-    <ClCompile Include="_Tester.cpp" />
+    <ClCompile Include="Synapse.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="useful_code_test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AllegroBitmap.h" />
     <ClInclude Include="AllegroWindow.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="DrawableTransparently.h" />
-    <ClInclude Include="DrawTarget.h" />
-    <ClInclude Include="GUIElement.h" />
-    <ClInclude Include="LoopedThreadGroup.h" />
-    <ClInclude Include="Math defines.h" />
+    <ClInclude Include="AnimationExponential.h" />
+    <ClInclude Include="AnimationLinear.h" />
+    <ClInclude Include="AnimationSine.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="ColorSquare.h" />
+    <ClInclude Include="Connection.h" />
+    <ClInclude Include="DirectedGraph.h" />
+    <ClInclude Include="NeuralNetwork.h" />
+    <ClInclude Include="Neuron.h" />
+    <ClInclude Include="NeuronLinear.h" />
+    <ClInclude Include="NeuronSigmoid.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Synapse.h" />
+    <ClInclude Include="TimeDependent.h" />
+    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="DrawTarget.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="LoopedThreadGroup.h" />
+    <ClInclude Include="math_defines.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="Mesh2D.h" />
-    <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="DataTransformer.h" />
-    <ClInclude Include="Neuron.h" />
-    <ClInclude Include="RandomTree.h" />
+    <ClInclude Include="Oblong.h" />
+    <ClInclude Include="DecisionTree.h" />
     <ClInclude Include="LoopedThread.h" />
-    <ClInclude Include="Drawable.h" />
-    <ClInclude Include="FullDataTransformer.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="Randomizable.h" />
     <ClInclude Include="Figure2D.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="ThreadDataQueue.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

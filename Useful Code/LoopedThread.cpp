@@ -4,22 +4,22 @@
 
 LoopedThread::~LoopedThread()
 {
-	Stop();
+	stop();
 }
 
-void LoopedThread::RequestStop()
+void LoopedThread::request_stop()
 {
-	Running = false;
+	running = false;
 }
 
-void LoopedThread::Stop()
+void LoopedThread::stop()
 {
-	RequestStop();
-	WaitUntilFinished();
+	running = false;
+	wait_until_finished();
 }
 
 
-void LoopedThread::WaitUntilFinished()
+void LoopedThread::wait_until_finished()
 {
-	if (thread.joinable()) thread.join();
+	if (_thread.joinable()) _thread.join();
 }

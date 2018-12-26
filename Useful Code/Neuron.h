@@ -1,55 +1,27 @@
 #pragma once
 #include <cmath>
-#include "DataTransformer.h"
-#include "Randomizable.h"
-#include "Graph.h"
+#include "Node.h"
 
-template <class NumType = double> class Neuron :
-	public DataTransformer<NumType, NumType>,
-	public Randomizable,
-	public GraphNode
+class Neuron :
+	public Node
 {
+	double _output = nan("");
+	double _derivative_output = nan("");
+
+	void _invalidate_outcoming_connections();
+
 public:
 
-	NumType OutputBias = 0;
+	Neuron();
+	virtual ~Neuron();
 
-	NumType(*ActivationFunction)(NumType) = Sigmoid;
-	NumType(*DerivativeFunction)(NumType) = DerivativeSigmoid;
+	virtual double activation_function(double input) const = 0;
+	virtual double derivative_function(double input) const = 0;
 
-
-
-	Neuron(Graph * const parentGraph) : GraphNode(parentGraph) {}
-	Neuron(Graph * const parentGraph, NumType(*activationFunction)(NumType), NumType(*derivativeFunction)(NumType))
-		: GraphNode(parentGraph), ActivationFunction(activationFunction), DerivativeFunction(derivativeFunction) {}
-	virtual ~Neuron() {}
+	const double& output();
+	void set_input(double input);
 
 
-	static NumType Sigmoid(NumType input) // (-oo, oo) -> (0, 1)
-	{
+	void add_delta(double delta_output);
 
-
-		return 1.0 / (1.0 + exp(-input));
-	}
-
-	
-	static NumType DerivativeSigmoid(NumType input)
-	{
-
-		NumType s = Sigmoid(input);
-		return s * (1.0 - s);
-
-	}
-
-	// Odziedziczono za poœrednictwem elementu Randomizable
-	virtual void Randomize() override
-	{
-		OutputBias = GetRandom(-1.0, 1.0);
-	}
-
-	// Odziedziczono za poœrednictwem elementu DataTransformer
-	virtual NumType GetOutput(const NumType & input) const override
-	{
-		return ActivationFunction(input) + OutputBias;
-	}
 };
-

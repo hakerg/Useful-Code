@@ -9,28 +9,28 @@ LoopedThreadGroup::LoopedThreadGroup()
 
 LoopedThreadGroup::~LoopedThreadGroup()
 {
-	StopAll();
+	stop_all();
 }
 
-void LoopedThreadGroup::RequestStopAll()
+void LoopedThreadGroup::request_stop_all()
 {
-	for (auto& c : *this) c.RequestStop();
+	for (auto& c : *this) c.request_stop();
 }
 
-void LoopedThreadGroup::StopAll()
+void LoopedThreadGroup::stop_all()
 {
-	RequestStopAll();
-	WaitUntilAllFinished();
+	request_stop_all();
+	wait_until_all_finished();
 }
 
-unsigned LoopedThreadGroup::RunningCount() const
+unsigned LoopedThreadGroup::running_count() const
 {
 	unsigned count = 0;
-	for (auto& c : *this) if (c.Running) count++;
+	for (auto& c : *this) if (c.running) count++;
 	return count;
 }
 
-void LoopedThreadGroup::WaitUntilAllFinished()
+void LoopedThreadGroup::wait_until_all_finished()
 {
-	for (auto& c : *this) c.WaitUntilFinished();
+	for (auto& c : *this) c.wait_until_finished();
 }

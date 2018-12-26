@@ -13,114 +13,264 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\WIP">
-      <UniqueIdentifier>{d3f27f75-c224-44af-9bf2-975583958eda}</UniqueIdentifier>
+    <Filter Include="Pliki nagłówkowe\abstract">
+      <UniqueIdentifier>{5fdf8557-94fa-4e73-95b0-ced121478a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\defines">
+      <UniqueIdentifier>{07b9c1cd-9a41-4969-9fe9-640d8ec823b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\geometry">
+      <UniqueIdentifier>{2dac5aa1-33c0-47c1-9b25-cf5ae2fbda29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ai">
+      <UniqueIdentifier>{f2c80b94-2d77-4a2e-af4f-fd782d9d1264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\geometry\abstract">
+      <UniqueIdentifier>{4d5158f8-ed44-496f-bffd-306618286b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\allegro">
+      <UniqueIdentifier>{bded5698-5368-4cdc-9426-64cc5d17fa4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\allegro\abstract">
+      <UniqueIdentifier>{22e6bb52-8867-46b5-b14a-6fe6e907ad7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\multithreading">
+      <UniqueIdentifier>{82974cd6-f7f1-4d5e-b014-017c6d134724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\in/out">
+      <UniqueIdentifier>{7341a23e-bfe9-4754-bcae-a4744fc93803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\graphics">
+      <UniqueIdentifier>{0b05a2cf-10f9-482c-abba-acb619094a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\graphics\abstract">
+      <UniqueIdentifier>{8198bf4a-6150-4dcf-bc2e-83e983df5a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\timing">
+      <UniqueIdentifier>{de4e2f33-9475-4240-b126-ab38486713d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\timing\abstract">
+      <UniqueIdentifier>{bfe7440b-28df-48bd-af11-5b77a8731e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\graphics\color">
+      <UniqueIdentifier>{84665c89-0e00-4f71-b2a3-6cf8e0bd373d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\ai\abstract">
+      <UniqueIdentifier>{840daf17-e815-4336-baa4-540459082a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\allegro">
+      <UniqueIdentifier>{96d19212-4cce-48fc-b17c-62245ec3e0db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\allegro\abstract">
+      <UniqueIdentifier>{23be7bf5-3a75-42b3-89f6-e57e9d0f3c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\timing">
+      <UniqueIdentifier>{7e34f404-4a81-4fa3-821c-509d85be73b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\timing\abstract">
+      <UniqueIdentifier>{375d3823-3ffc-4de5-826f-9e0808c28d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\multithreading">
+      <UniqueIdentifier>{a8b977ab-14ca-4d0c-a21b-1d18227aa133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\in/out">
+      <UniqueIdentifier>{5a57dc2c-1b3b-43bb-b25b-19c7ec91010b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\abstract">
+      <UniqueIdentifier>{6decfd50-37c1-4c2f-88f8-48d346d9178c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\graphics">
+      <UniqueIdentifier>{f1b6dbf5-9aea-418b-b431-06f6fd7dd277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\graphics\abstract">
+      <UniqueIdentifier>{df753323-a78f-4e65-a9cf-067514591dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\geometry">
+      <UniqueIdentifier>{50ac2ae0-34e6-49fa-937d-50b6b98af12a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ai">
+      <UniqueIdentifier>{3fcd577a-1222-472f-9598-ad3a29389e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\ai\abstract">
+      <UniqueIdentifier>{92c8e9d2-1d40-4507-a8f3-33dd00b85614}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Randomizable.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawable.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="AllegroBitmap.cpp">
+      <Filter>Pliki źródłowe\allegro</Filter>
     </ClCompile>
     <ClCompile Include="AllegroWindow.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\allegro\abstract</Filter>
     </ClCompile>
-    <ClCompile Include="GUIElement.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="TimeDependent.cpp">
+      <Filter>Pliki źródłowe\timing\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationExponential.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationLinear.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationSine.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
     </ClCompile>
     <ClCompile Include="LoopedThread.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\multithreading</Filter>
     </ClCompile>
     <ClCompile Include="LoopedThreadGroup.cpp">
+      <Filter>Pliki źródłowe\multithreading</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cpp">
+      <Filter>Pliki źródłowe\in/out</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Pliki źródłowe\in/out</Filter>
+    </ClCompile>
+    <ClCompile Include="Randomizable.cpp">
+      <Filter>Pliki źródłowe\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Pliki źródłowe\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Pliki źródłowe\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Pliki źródłowe\graphics\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Pliki źródłowe\graphics\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Pliki źródłowe\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron.cpp">
+      <Filter>Pliki źródłowe\ai\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuralNetwork.cpp">
+      <Filter>Pliki źródłowe\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronLinear.cpp">
+      <Filter>Pliki źródłowe\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="NeuronSigmoid.cpp">
+      <Filter>Pliki źródłowe\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="Synapse.cpp">
+      <Filter>Pliki źródłowe\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="useful_code_test.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="_Tester.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawableTransparently.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawTarget.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="DirectedGraph.cpp">
+      <Filter>Pliki źródłowe\in/out</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FullDataTransformer.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Randomizable.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Graph.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\abstract</Filter>
     </ClInclude>
     <ClInclude Include="Vector2D.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Circle.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
     <ClInclude Include="Square.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Figure2D.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="Oblong.h">
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
     <ClInclude Include="Mesh2D.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Neuron.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="Circle.h">
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Synapse.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="Figure2D.h">
+      <Filter>Pliki nagłówkowe\geometry\abstract</Filter>
     </ClInclude>
-    <ClInclude Include="RandomTree.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreadDataQueue.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTransformer.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Math defines.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIElement.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="LoopedThread.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="LoopedThreadGroup.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableTransparently.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawTarget.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="AllegroBitmap.h">
+      <Filter>Pliki nagłówkowe\allegro</Filter>
     </ClInclude>
     <ClInclude Include="AllegroWindow.h">
+      <Filter>Pliki nagłówkowe\allegro\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopedThread.h">
+      <Filter>Pliki nagłówkowe\multithreading</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopedThreadGroup.h">
+      <Filter>Pliki nagłówkowe\multithreading</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadDataQueue.h">
+      <Filter>Pliki nagłówkowe\multithreading</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Pliki nagłówkowe\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawTarget.h">
+      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationExponential.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationLinear.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSine.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeDependent.h">
+      <Filter>Pliki nagłówkowe\timing\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuralNetwork.h">
+      <Filter>Pliki nagłówkowe\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Pliki nagłówkowe\ai\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Pliki nagłówkowe\ai\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Pliki nagłówkowe\in/out</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>Pliki nagłówkowe\in/out</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectedGraph.h">
+      <Filter>Pliki nagłówkowe\in/out</Filter>
+    </ClInclude>
+    <ClInclude Include="Synapse.h">
+      <Filter>Pliki nagłówkowe\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronLinear.h">
+      <Filter>Pliki nagłówkowe\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="NeuronSigmoid.h">
+      <Filter>Pliki nagłówkowe\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="Neuron.h">
+      <Filter>Pliki nagłówkowe\ai\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorSquare.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="math_defines.h">
+      <Filter>Pliki nagłówkowe\defines</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Pliki nagłówkowe\graphics\color</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionTree.h">
+      <Filter>Pliki nagłówkowe\ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

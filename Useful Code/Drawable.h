@@ -3,10 +3,13 @@
 
 class Drawable
 {
+
+	virtual void _draw(DrawTarget * target, float alpha) const = 0;
+
 public:
 	Drawable();
 	virtual ~Drawable();
 
-	virtual void Draw(DrawTarget * target) const = 0;
+	void draw(DrawTarget * target, float alpha = 1.0f) const;
 };
 

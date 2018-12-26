@@ -1,102 +1,92 @@
 #pragma once
-#include <queue>
 #include <mutex>
+#include <queue>
 
-template <class T> class ThreadDataQueue
+template <class _Type> class ThreadDataQueue
 {
 
-	std::queue<T> queue;
-	std::mutex queueMutex;
+	std::queue<_Type> _queue;
+	std::mutex _queue_mutex;
 
 public:
 
-	unsigned MaxSize;
+	unsigned max_size;
 
 
-	ThreadDataQueue(unsigned maxSize) : MaxSize(maxSize) {}
+	ThreadDataQueue(unsigned _max_size) : max_size(_max_size) {}
 	virtual ~ThreadDataQueue() {}
-	
 
-	bool TryPush(const T & value)
+
+	void clear()
 	{
 
-		auto free = (queue.size() < MaxSize);
-		if (free)
-		{
-			queueMutex.lock();
-			queue.push(value);
-			queueMutex.unlock();
-		}
+		std::queue<_Type> empty;
+		std::lock_guard<std::mutex> lock(_queue_mutex);
+
+		_queue = empty;
+
+	}
+	
+
+	bool try_push(const _Type & value)
+	{
+
+		if (_queue.size() >= max_size) return false;
+
+		std::lock_guard<std::mutex> lock(_queue_mutex);
+		_queue.push(value);
 		
-		return free;
+		return true;
 	}
 
 
-	void ForcePush(const T & value)
+	bool try_pop()
 	{
-		queueMutex.lock();
-		queue.push(value);
-		while (queue.size() > MaxSize) queue.pop();
+		std::lock_guard<std::mutex> lock(_queue_mutex);
 
-		queueMutex.unlock();
-
-	}
-
-
-	bool TryPop()
-	{
-		queueMutex.lock();
-
-		bool ret = queue.size();
-		if (ret)
+		if (_queue.size())
 		{
-			queue.pop();
+			_queue.pop();
+			return true;
 		}
-
-		queueMutex.unlock();
-		return ret;
+		else return false;
 	}
 
-	bool TryPop(T & output)
+	bool try_pop(_Type & _out_value)
 	{
-		queueMutex.lock();
+		std::lock_guard<std::mutex> lock(_queue_mutex);
 
-		bool ret = queue.size();
-		if (ret)
+		if (_queue.size())
 		{
-			output = queue.front();
-			queue.pop();
+			_out_value = _queue.front();
+			_queue.pop();
+			return true;
 		}
-
-		queueMutex.unlock();
-		return ret;
+		else return false;
 	}
 
-	T & Front()
+	_Type & front()
 	{
-		queueMutex.lock();
+		std::lock_guard<std::mutex> lock(_queue_mutex);
 
-		T & ret = queue.front();
-
-		queueMutex.unlock();
-		return ret;
+		return _queue.front();
 	}
 
 	
-	bool Empty() const
+	bool empty() const
 	{
-		return queue.empty();
+		return _queue.empty();
 	}
 
 
-	unsigned Size() const
+	unsigned size() const
 	{
-		return queue.size();
+		return _queue.size();
 	}
 
 
-	bool Full() const
+	bool full() const
 	{
-		return Size() >= MaxSize;
+		return size() >= max_size;
 	}
 };

@@ -1,47 +1,32 @@
 #pragma once
 #include <allegro5/allegro.h>
-#include "LoopedThread.h"
-#include "ThreadDataQueue.h"
-#include "DrawableTransparently.h"
-#include "Animation.h"
-#include "DrawTarget.h"
 #include "Vector2D.h"
+#include "Window.h"
 
-class AllegroWindow : public Animation, public DrawTarget
+class AllegroWindow : public Window
 {
 
-	ALLEGRO_EVENT_QUEUE * queue;
+	bool _acknowledge_drawing_halt = false;
 
-	bool parseEvent();
+	ALLEGRO_EVENT_QUEUE * _queue;
 
-	virtual bool handleEvent(const ALLEGRO_EVENT & event) = 0;
-	bool pushNextFrame(bool * running);
-	virtual bool drawFrame(bool * running);
+	virtual bool _parse_event() override; // thread #1
+	virtual void _finish_frame() override; // main thread
+	virtual std::shared_ptr<Image> _create_buffer_image() const override; // main thread
+	virtual void _set_target() const override; // main thread
 
-protected:
-
-	virtual void startFrame() = 0;
-	virtual void finishFrame() = 0;
+	virtual bool _handle_event(const ALLEGRO_EVENT & event) = 0; // thread #1
 
 public:
 
-	ALLEGRO_DISPLAY * const Display;
-	ThreadDataQueue<std::shared_ptr<DrawableTransparently>> FrameBuffer;
-	bool AutoSkipFrames = false;
+	ALLEGRO_DISPLAY * const k_display;
 
 
-	AllegroWindow(const Vector2D<unsigned> & size, unsigned bufferedFrames = 1);
+	AllegroWindow(const Vector2D<unsigned> & _size, unsigned _buffered_frames);
 	virtual ~AllegroWindow();
 
-	void Run(double framePeriod_ms = 0);
-	virtual std::shared_ptr<DrawableTransparently> GetCopiedDrawable() const = 0;
-
-	static double ToMilliseconds(double fps);
-
-
-	Vector2D<unsigned> GetSize() const;
-	unsigned GetFramerate() const;
-	Vector2D<float> GetPixelPosition(const Vector2D<double> & windowPosition) const;
+	virtual Vector2D<unsigned> size() const override;
+	unsigned framerate() const;
 
 };
 

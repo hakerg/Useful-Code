@@ -1,6 +1,6 @@
 #pragma once
-#include "LoopedThread.h"
 #include <vector>
+#include "LoopedThread.h"
 
 class LoopedThreadGroup :
 	public std::vector<LoopedThread>
@@ -9,11 +9,11 @@ public:
 	LoopedThreadGroup();
 	virtual ~LoopedThreadGroup();
 
-	void RequestStopAll();
-	void StopAll();
-	unsigned RunningCount() const;
+	void request_stop_all();
+	void stop_all();
+	unsigned running_count() const;
 
-	void WaitUntilAllFinished();
+	void wait_until_all_finished();
 
 };
 

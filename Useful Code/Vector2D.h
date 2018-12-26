@@ -1,62 +1,84 @@
 #pragma once
-#include <math.h>
+#include <cmath>
+#include <type_traits>
 
-template <class NumType = double> class Vector2D
+template <class _Numeric> class Vector2D
 {
 public:
 
-	NumType X, Y;
+	_Numeric x, y;
 
 
-	Vector2D(NumType x, NumType y) : X(x), Y(y) {}
-	Vector2D(const Vector2D<NumType> & from, const Vector2D<NumType> & to) : X(to.X - from.X), Y(to.Y - from.Y) {}
+	Vector2D(_Numeric _x, _Numeric _y) : x(_x), y(_y) {}
+	Vector2D(const Vector2D<_Numeric> & _from, const Vector2D<_Numeric> & _to) : x(_to.x - _from.x), y(_to.y - _from.y) {}
 	virtual ~Vector2D() {}
 
-	static Vector2D<NumType> FromPolar(NumType length, NumType rotation)
+	static Vector2D<_Numeric> FromPolar(double length, double rotation)
 	{
-		return Vector2D<NumType>(length * cos(rotation), length * sin(rotation));
+		return Vector2D<_Numeric>(length * cos(rotation), length * sin(rotation));
 	}
 
-	NumType GetLength() const { return sqrt(X * X + Y * Y); }
-	NumType GetRotation() const { return atan2(Y, X); }
+	double length() const { return sqrt(x * x + y * y); }
+	double rotation() const { return atan2(y, x); }
 
 
-	Vector2D<NumType> GetRotated(NumType rotation) const
+	Vector2D<_Numeric> get_rotated(double rotation) const
 	{
-		NumType sinA = sin(rotation);
-		NumType cosA = cos(rotation);
-		return Vector2D<NumType>(X * cosA - Y * sinA, X * sinA + Y * cosA);
+		_Numeric sin_a = sin(rotation);
+		_Numeric cos_a = cos(rotation);
+		return Vector2D<_Numeric>(x * cos_a - y * sin_a, x * sin_a + y * cos_a);
 	}
 
 
-	bool operator == (const Vector2D<NumType> & b) const
+	double quadrature() const
 	{
-		return X == b.X && Y == b.Y;
+		return sqrt(x * y);
 	}
 
-	Vector2D<NumType> operator + (const Vector2D<NumType> & b) const
+
+	template <class _NumType2> bool operator == (const Vector2D<_NumType2> & rhs) const
 	{
-		return Vector2D<NumType>(X + b.X, Y + b.Y);
+		return x == rhs.x && y == rhs.y;
 	}
 
-	Vector2D<NumType> operator - (const Vector2D<NumType> & b) const
+	template <class _NumType2> bool operator != (const Vector2D<_NumType2> & rhs) const
 	{
-		return Vector2D<NumType>(X - b.X, Y - b.Y);
+		return !(*this == rhs);
 	}
 
-	Vector2D<NumType> operator * (NumType b) const
+	template <class _NumType2> Vector2D<typename std::common_type<_Numeric, _NumType2>::type> operator + (const Vector2D<_NumType2> & rhs) const
 	{
-		return Vector2D<NumType>(X * b, Y * b);
+		return Vector2D<typename std::common_type<_Numeric, _NumType2>::type>(x + rhs.x, y + rhs.y);
 	}
 
-	Vector2D<NumType> operator * (const Vector2D<NumType> & b) const
+	template <class _NumType2> Vector2D<typename std::common_type<_Numeric, _NumType2>::type> operator - (const Vector2D<_NumType2> & rhs) const
 	{
-		return Vector2D<NumType>(X * b.X, Y * b.Y);
+		return Vector2D<typename std::common_type<_Numeric, _NumType2>::type>(x - rhs.x, y - rhs.y);
 	}
 
-	Vector2D<NumType> operator / (NumType b) const
+	Vector2D<_Numeric> operator * (_Numeric rhs) const
 	{
-		return Vector2D<NumType>(X / b, Y / b);
+		return Vector2D<_Numeric>(x * rhs, y * rhs);
+	}
+
+	template <class _NumType2> Vector2D<typename std::common_type<_Numeric, _NumType2>::type> operator * (const Vector2D<_NumType2> & rhs) const
+	{
+		return Vector2D<typename std::common_type<_Numeric, _NumType2>::type>(x * rhs.x, y * rhs.y);
+	}
+
+	Vector2D<_Numeric> operator / (_Numeric rhs) const
+	{
+		return Vector2D<_Numeric>(x / rhs, y / rhs);
+	}
+
+	template <class _NumType2> Vector2D<typename std::common_type<_Numeric, _NumType2>::type> operator / (const Vector2D<_NumType2> & rhs) const
+	{
+		return Vector2D<typename std::common_type<_Numeric, _NumType2>::type>(x / rhs.x, y / rhs.y);
+	}
+
+	template <class _NewNumType> Vector2D<_NewNumType> cast() const
+	{
+		return Vector2D<_NewNumType>(x, y);
 	}
 }; 
 

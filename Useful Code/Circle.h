@@ -1,28 +1,26 @@
 #pragma once
 #include "Figure2D.h"
+#include "math_defines.h"
 #include "Vector2D.h"
 
-constexpr auto Pi = 3.1415926535897932384626433832795;
-constexpr auto Pi2 = 6.283185307179586476925286766559;
-
-template <class NumType = double> class Circle :
-	public Figure2D<NumType>
+class Circle :
+	public Figure2D<double>
 {
 public:
 
-	Vector2D<NumType> Center;
-	double Radius;
+	Vector2D<double> center;
+	double radius;
 
 
-	Circle(const Vector2D<NumType> & center, double radius) : Center(center), Radius(radius) {}
-	virtual ~Circle() {}
+	Circle(const Vector2D<double> & _center, double _radius);
+	virtual ~Circle();
 
 	// Odziedziczono za poœrednictwem elementu Shape2D
-	virtual bool IsInside(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() < Radius; }
-	virtual bool IsOnBorder(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() == Radius; }
-	virtual bool IsOver(const Vector2D<NumType>& point) const override { return Vector2D<NumType>(Center, point).GetLength() <= Radius; }
+	virtual bool inside(const Vector2D<double>& point) const override;
+	virtual bool on_border(const Vector2D<double>& point) const override;
+	virtual bool over(const Vector2D<double>& point) const override;
 
-	virtual NumType GetArea() const override { return Pi * Radius * Radius; }
-	virtual NumType GetCircumference() const override { Pi2 * Radius; }
+	virtual double area() const override;
+	virtual double circumference() const override;
 };
 

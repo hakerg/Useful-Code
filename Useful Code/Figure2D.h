@@ -1,17 +1,17 @@
 #pragma once
 #include "Vector2D.h"
 
-template <class NumType = double> class Figure2D
+template <class _Numeric> class Figure2D
 {
 public:
 	Figure2D() {}
 	virtual ~Figure2D() {}
 
-	virtual bool IsInside(const Vector2D<NumType> & point) const = 0;
-	virtual bool IsOnBorder(const Vector2D<NumType> & point) const = 0;
-	virtual bool IsOver(const Vector2D<NumType> & point) const = 0;
+	virtual bool inside(const Vector2D<_Numeric> & point) const = 0;
+	virtual bool on_border(const Vector2D<_Numeric> & point) const = 0;
+	virtual bool over(const Vector2D<_Numeric> & point) const = 0;
 
-	virtual NumType GetArea() const = 0;
-	virtual NumType GetCircumference() const = 0;
+	virtual _Numeric area() const = 0;
+	virtual _Numeric circumference() const = 0;
 };
 

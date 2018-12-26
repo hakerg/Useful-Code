@@ -1,46 +1,43 @@
 #pragma once
-#include "Figure2D.h"
-#include <vector>
 #include <memory>
+#include <vector>
+#include "Figure2D.h"
 
-template <class NumType = double> class Mesh2D :
-	public Figure2D<NumType>
+template <class _Numeric> class Mesh2D :
+	public Figure2D<_Numeric>, public std::vector<std::shared_ptr<Figure2D<_Numeric>>>
 {
 public:
-
-	std::vector<std::shared_ptr<Mesh2D<NumType>>> ChildFigures;
-
 
 	Mesh2D() {}
 	virtual ~Mesh2D() {}
 
 	// Odziedziczono za poœrednictwem elementu Figure2D
-	virtual bool IsInside(const Vector2D<NumType>& point) const override
+	virtual bool inside(const Vector2D<_Numeric>& point) const override
 	{
-		for (auto& child : ChildFigures) if (child->IsInside(point)) return true;
+		for (auto& child : *this) if (child->inside(point)) return true;
 		return false;
 	}
-	virtual bool IsOnBorder(const Vector2D<NumType>& point) const override
+	virtual bool on_border(const Vector2D<_Numeric>& point) const override
 	{
-		for (auto& child : ChildFigures) if (child->IsOnBorder(point)) return true;
+		for (auto& child : *this) if (child->on_border(point)) return true;
 		return false;
 	}
-	virtual bool IsOver(const Vector2D<NumType>& point) const override
+	virtual bool over(const Vector2D<_Numeric>& point) const override
 	{
-		for (auto& child : ChildFigures) if (child->IsOver(point)) return true;
+		for (auto& child : *this) if (child->over(point)) return true;
 		return false;
 	}
-	virtual NumType GetArea() const override
+	virtual _Numeric area() const override
 	{
-		NumType area = 0;
-		for (auto& child : ChildFigures) area += child->GetArea();
-		return area;
+		_Numeric ret = 0;
+		for (auto& child : *this) ret += child->area();
+		return ret;
 	}
-	virtual NumType GetCircumference() const override
+	virtual _Numeric circumference() const override
 	{
-		NumType circumference = 0;
-		for (auto& child : ChildFigures) circumference += child->GetCircumference();
-		return circumference;
+		_Numeric ret = 0;
+		for (auto& child : *this) ret += child->circumference();
+		return ret;
 	}
 };
 
