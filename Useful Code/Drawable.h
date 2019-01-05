@@ -1,15 +1,17 @@
 #pragma once
-#include "DrawTarget.h"
 
-class Drawable
+namespace uc
 {
 
-	virtual void _draw(DrawTarget * target, float alpha) const = 0;
+	template <class _DrawTarget>
+	class Drawable
+	{
+	public:
 
-public:
-	Drawable();
-	virtual ~Drawable();
+		virtual void draw(_DrawTarget & target) = 0;
 
-	void draw(DrawTarget * target, float alpha = 1.0f) const;
-};
+		Drawable() {}
+		virtual ~Drawable() {}
+	};
 
+}

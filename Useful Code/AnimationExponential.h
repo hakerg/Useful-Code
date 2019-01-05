@@ -1,17 +1,22 @@
 #pragma once
 #include "TimeDependent.h"
 
-class AnimationExponential : public TimeDependent
+namespace uc
 {
-public:
 
-	double factor, target_value;
-	double & value;
+	// makes an animation by modifying continuously given external value
+	class AnimationExponential : public TimeDependent
+	{
+	public:
 
-	AnimationExponential(double & _value, double _factor, double _target_value);
-	virtual ~AnimationExponential();
+		double factor, target;
+		double & value;
 
-	// Odziedziczono za poœrednictwem elementu TimeDependent
-	virtual bool add_time(std::chrono::duration<double> delta_time) override;
-};
+		AnimationExponential(double & value_, double factor_, double target_);
+		virtual ~AnimationExponential();
 
+		// Odziedziczono za poœrednictwem elementu TimeDependent
+		bool add_time(std::chrono::duration<double> delta_time) override;
+	};
+
+}

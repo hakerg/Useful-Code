@@ -2,101 +2,143 @@
 #include <chrono>
 #include <thread>
 
-class LoopedThread
+namespace uc
 {
 
-	std::thread _thread;
-
-public:
-
-	bool running;
-	std::chrono::nanoseconds period;
-
-	// funcToLoop: return false if thread has to be killed. Should not be looped
-	template <class... _Args>
-	LoopedThread(std::chrono::duration<double> _period, bool _wait_until_first_execution, bool(*_function_to_loop)(_Args...), _Args&&... _args)
-		: period(std::chrono::duration_cast<std::chrono::nanoseconds>(_period)), running(true)
-	{
-		_thread = std::thread(&LoopedThread::loop_function_periodically<_Args...>, this, _wait_until_first_execution, _function_to_loop, _args...);
-	}
-
-	// funcToLoop: return false if thread has to be killed. Should not be looped
-	template <class _Class, class... _Args>
-	LoopedThread(std::chrono::duration<double> _period, bool _wait_until_first_execution, _Class* _object, bool(_Class::*_method_to_loop)(_Args...), _Args&&... _args)
-		: period(std::chrono::duration_cast<std::chrono::nanoseconds>(_period)), running(true)
-	{
-		_thread = std::thread(&LoopedThread::loop_method_periodically<_Class, _Args...>, this, _wait_until_first_execution, _object, _method_to_loop, _args...);
-	}
-
-	virtual ~LoopedThread();
-
-	void request_stop();
-	void stop();
-
-	void wait_until_finished();
-
-
-	// funcToLoop: return false to stop. Should not be looped; running: set to false to stop
-	template <class... _Args>
-	void loop_function_periodically(bool wait_until_first_execution, bool(*function_to_loop)(_Args...), _Args&&... args)
+	// calls given function or method periodically in a separate thread
+	// makes sure that calling frequency is constant - when one call takes too much time object will make next calls more often
+	// you can change period and next_call_time at any time
+	class LoopedThread
 	{
 
-		std::chrono::high_resolution_clock::time_point next_call_time = std::chrono::high_resolution_clock::now();
+		std::thread _thread;
 
-		if (wait_until_first_execution) next_call_time += period;
+	public:
 
-		while (running)
+		bool running;
+		std::chrono::nanoseconds period;
+		std::chrono::high_resolution_clock::time_point next_call_time;
+
+		// function_to_loop_: return false if thread has to be killed. Should not be looped
+		template <class _Rep, class _Period, class... _Args>
+		LoopedThread(
+			std::chrono::duration<_Rep, _Period> period_,
+			bool wait_until_first_execution_,
+			bool(*function_to_loop_)(_Args...),
+			_Args&&... args_)
+			:
+			period(std::chrono::duration_cast<std::chrono::nanoseconds>(period_)),
+			running(true)
 		{
 
-			if (std::chrono::high_resolution_clock::now() < next_call_time)
-			{
+			if (wait_until_first_execution_) next_call_time = std::chrono::high_resolution_clock::now() + period;
+			else next_call_time = std::chrono::high_resolution_clock::now();
 
-				std::this_thread::yield();
-				continue;
-
-			}
-
-			if (!function_to_loop(args...))
-			{
-				running = false;
-				return;
-			}
-
-			next_call_time += period;
-
+			_thread = std::thread(
+				&LoopedThread::loop_function_periodically<_Args...>,
+				this,
+				function_to_loop_,
+				args_...);
 		}
-	}
 
-	// funcToLoop: return false to stop. Should not be looped; running: set to false to stop
-	template <class _Class, class... _Args>
-	void loop_method_periodically(bool wait_until_first_execution, _Class* object, bool(_Class::*method_to_loop)(_Args...), _Args&&... args)
-	{
-
-		std::chrono::high_resolution_clock::time_point next_call_time = std::chrono::high_resolution_clock::now();
-
-		if (wait_until_first_execution) next_call_time += period;
-
-		while (running)
+		// method_to_loop_: return false if thread has to be killed. Should not be looped
+		template <class _Rep, class _Period, class _Class, class... _Args>
+		LoopedThread(
+			std::chrono::duration<_Rep, _Period> period_,
+			bool wait_until_first_execution_,
+			_Class* object_,
+			bool(_Class::*method_to_loop_)(_Args...),
+			_Args&&... args_)
+			:
+			period(std::chrono::duration_cast<std::chrono::nanoseconds>(period_)),
+			running(true)
 		{
 
-			if (std::chrono::high_resolution_clock::now() < next_call_time)
-			{
+			if (wait_until_first_execution_) next_call_time = std::chrono::high_resolution_clock::now() + period;
+			else next_call_time = std::chrono::high_resolution_clock::now();
 
-				std::this_thread::yield();
-				continue;
-
-			}
-
-			if (!(object->*method_to_loop)(args...))
-			{
-				running = false;
-				return;
-			}
-
-			next_call_time += period;
-
+			_thread = std::thread(
+				&LoopedThread::loop_method_periodically<_Class, _Args...>,
+				this,
+				object_,
+				method_to_loop_,
+				args_...);
 		}
-	}
 
-};
+		virtual ~LoopedThread();
 
+		void request_stop();
+		void stop();
+
+		void wait_until_finished();
+
+
+		template <class... _Args>
+		void loop_function_periodically(bool(*function_to_loop)(_Args...), _Args&&... args)
+		{
+
+			while (running)
+			{
+
+				if (std::chrono::high_resolution_clock::now() < next_call_time - std::chrono::nanoseconds(2000000))
+				{
+
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+					continue;
+
+				}
+				if (std::chrono::high_resolution_clock::now() < next_call_time)
+				{
+
+					std::this_thread::yield();
+					continue;
+
+				}
+
+				if (!function_to_loop(args...))
+				{
+					running = false;
+					return;
+				}
+
+				next_call_time += period;
+
+			}
+		}
+
+		template <class _Class, class... _Args>
+		void loop_method_periodically(_Class* object, bool(_Class::*method_to_loop)(_Args...), _Args&&... args)
+		{
+
+			while (running)
+			{
+
+				if (std::chrono::high_resolution_clock::now() < next_call_time - std::chrono::nanoseconds(2000000))
+				{
+
+					std::this_thread::sleep_for(std::chrono::milliseconds(1));
+					continue;
+
+				}
+				if (std::chrono::high_resolution_clock::now() < next_call_time)
+				{
+
+					std::this_thread::yield();
+					continue;
+
+				}
+
+				if (!(object->*method_to_loop)(args...))
+				{
+					running = false;
+					return;
+				}
+
+				next_call_time += period;
+
+			}
+		}
+
+	};
+
+}

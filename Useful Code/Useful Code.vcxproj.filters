@@ -61,9 +61,6 @@
     <Filter Include="Pliki źródłowe\allegro">
       <UniqueIdentifier>{96d19212-4cce-48fc-b17c-62245ec3e0db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\allegro\abstract">
-      <UniqueIdentifier>{23be7bf5-3a75-42b3-89f6-e57e9d0f3c22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\timing">
       <UniqueIdentifier>{7e34f404-4a81-4fa3-821c-509d85be73b2}</UniqueIdentifier>
     </Filter>
@@ -79,12 +76,6 @@
     <Filter Include="Pliki źródłowe\abstract">
       <UniqueIdentifier>{6decfd50-37c1-4c2f-88f8-48d346d9178c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\graphics">
-      <UniqueIdentifier>{f1b6dbf5-9aea-418b-b431-06f6fd7dd277}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\graphics\abstract">
-      <UniqueIdentifier>{df753323-a78f-4e65-a9cf-067514591dc4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\geometry">
       <UniqueIdentifier>{50ac2ae0-34e6-49fa-937d-50b6b98af12a}</UniqueIdentifier>
     </Filter>
@@ -94,13 +85,16 @@
     <Filter Include="Pliki źródłowe\ai\abstract">
       <UniqueIdentifier>{92c8e9d2-1d40-4507-a8f3-33dd00b85614}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\gui">
+      <UniqueIdentifier>{a79ed292-1dcf-4ea8-b0bf-1f9eb711be8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\gui\abstract">
+      <UniqueIdentifier>{6b775bad-563f-4963-b0c2-05213ef18cdd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AllegroBitmap.cpp">
       <Filter>Pliki źródłowe\allegro</Filter>
-    </ClCompile>
-    <ClCompile Include="AllegroWindow.cpp">
-      <Filter>Pliki źródłowe\allegro\abstract</Filter>
     </ClCompile>
     <ClCompile Include="TimeDependent.cpp">
       <Filter>Pliki źródłowe\timing\abstract</Filter>
@@ -109,9 +103,6 @@
       <Filter>Pliki źródłowe\timing</Filter>
     </ClCompile>
     <ClCompile Include="AnimationLinear.cpp">
-      <Filter>Pliki źródłowe\timing</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationSine.cpp">
       <Filter>Pliki źródłowe\timing</Filter>
     </ClCompile>
     <ClCompile Include="LoopedThread.cpp">
@@ -128,18 +119,6 @@
     </ClCompile>
     <ClCompile Include="Randomizable.cpp">
       <Filter>Pliki źródłowe\abstract</Filter>
-    </ClCompile>
-    <ClCompile Include="GUI.cpp">
-      <Filter>Pliki źródłowe\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Pliki źródłowe\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawable.cpp">
-      <Filter>Pliki źródłowe\graphics\abstract</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Pliki źródłowe\graphics\abstract</Filter>
     </ClCompile>
     <ClCompile Include="Circle.cpp">
       <Filter>Pliki źródłowe\geometry</Filter>
@@ -159,24 +138,39 @@
     <ClCompile Include="Synapse.cpp">
       <Filter>Pliki źródłowe\ai</Filter>
     </ClCompile>
-    <ClCompile Include="useful_code_test.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="DirectedGraph.cpp">
       <Filter>Pliki źródłowe\in/out</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeLimited.cpp">
+      <Filter>Pliki źródłowe\timing\abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Oscilation.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="OPTCounter.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformation.cpp">
+      <Filter>Pliki źródłowe\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationQuarterSine.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationHalfCosine.cpp">
+      <Filter>Pliki źródłowe\timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Randomizable.h">
       <Filter>Pliki nagłówkowe\abstract</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Pliki nagłówkowe\geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Square.h">
-      <Filter>Pliki nagłówkowe\geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Oblong.h">
       <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
     <ClInclude Include="Mesh2D.h">
@@ -203,15 +197,6 @@
     <ClInclude Include="ThreadDataQueue.h">
       <Filter>Pliki nagłówkowe\multithreading</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Pliki nagłówkowe\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.h">
-      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawTarget.h">
-      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
-    </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
     </ClInclude>
@@ -219,9 +204,6 @@
       <Filter>Pliki nagłówkowe\timing</Filter>
     </ClInclude>
     <ClInclude Include="AnimationLinear.h">
-      <Filter>Pliki nagłówkowe\timing</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationSine.h">
       <Filter>Pliki nagłówkowe\timing</Filter>
     </ClInclude>
     <ClInclude Include="TimeDependent.h">
@@ -257,12 +239,6 @@
     <ClInclude Include="Neuron.h">
       <Filter>Pliki nagłówkowe\ai\abstract</Filter>
     </ClInclude>
-    <ClInclude Include="ColorSquare.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
-    </ClInclude>
     <ClInclude Include="math_defines.h">
       <Filter>Pliki nagłówkowe\defines</Filter>
     </ClInclude>
@@ -271,6 +247,45 @@
     </ClInclude>
     <ClInclude Include="DecisionTree.h">
       <Filter>Pliki nagłówkowe\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>Pliki nagłówkowe\graphics\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Array2D.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIManager.h">
+      <Filter>Pliki nagłówkowe\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIElement.h">
+      <Filter>Pliki nagłówkowe\gui\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeLimited.h">
+      <Filter>Pliki nagłówkowe\timing\abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscilation.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="OPTCounter.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformation.h">
+      <Filter>Pliki nagłówkowe\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationQuarterSine.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationHalfCosine.h">
+      <Filter>Pliki nagłówkowe\timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Pliki nagłówkowe\geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

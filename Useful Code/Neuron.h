@@ -2,26 +2,33 @@
 #include <cmath>
 #include "Node.h"
 
-class Neuron :
-	public Node
+namespace uc
 {
-	double _output = nan("");
-	double _derivative_output = nan("");
 
-	void _invalidate_outcoming_connections();
+	// neuron class used by neural network
+	class Neuron :
+		public Node
+	{
+		double _output = nan("");
+		double _derivative_output = nan("");
 
-public:
+		void _invalidate_outcoming_connections();
 
-	Neuron();
-	virtual ~Neuron();
+	public:
 
-	virtual double activation_function(double input) const = 0;
-	virtual double derivative_function(double input) const = 0;
+		Neuron();
+		virtual ~Neuron();
 
-	const double& output();
-	void set_input(double input);
+		virtual double activation_function(double input) const = 0;
+		virtual double derivative_function(double input) const = 0;
 
+		const double& output();
+		void set_input(double input);
 
-	void add_delta(double delta_output);
+		// used by back-propagation algorithm
+		// forces input neurons to give proper value
+		void add_delta(double delta_output);
 
-};
+	};
+
+}

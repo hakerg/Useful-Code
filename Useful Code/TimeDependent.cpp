@@ -1,12 +1,15 @@
 #include "TimeDependent.h"
 
-
-
-TimeDependent::TimeDependent()
+namespace uc
 {
-}
+
+	TimeDependent::TimeDependent()
+	{
+	}
 
 
-TimeDependent::~TimeDependent()
-{
+	TimeDependent::~TimeDependent()
+	{
+	}
+
 }

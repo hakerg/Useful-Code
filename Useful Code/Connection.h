@@ -1,35 +1,44 @@
 #pragma once
 #include <type_traits>
 
-class Node;
-
-class Connection
+namespace uc
 {
-public:
-	Node * const k_source;
-	Node * const k_target;
 
-	Connection(Node * _source, Node * _target);
-	virtual ~Connection();
+	class Node;
 
-	// _Connection must inherit from Connection
-	template <class _Connection>
-	std::enable_if_t<std::is_base_of_v<Connection, _Connection>, _Connection>* cast()
+	// one-directional connection used by DirectedGraph
+	class Connection
 	{
-		return (_Connection*)this;
-	}
+	public:
+		Node * const k_source;
+		Node * const k_target;
 
-	// _Node must inherit from Node
-	template <class _Node>
-	std::enable_if_t<std::is_base_of_v<Node, _Node>, _Node>* source() const
-	{
-		return (_Node*)k_source;
-	}
+		Connection(Node * source_, Node * target_);
+		virtual ~Connection();
 
-	// _Node must inherit from Node
-	template <class _Node>
-	std::enable_if_t<std::is_base_of_v<Node, _Node>, _Node>* target() const
-	{
-		return (_Node*)k_target;
-	}
-};
+		// _Connection must inherit from Connection
+		// use it only if you are sure of the type
+		template <class _Connection>
+		std::enable_if_t<std::is_base_of_v<Connection, _Connection>, _Connection>* cast()
+		{
+			return (_Connection*)this;
+		}
+
+		// _Node must inherit from Node
+		// use it only if you are sure of the type
+		template <class _Node>
+		std::enable_if_t<std::is_base_of_v<Node, _Node>, _Node>* source() const
+		{
+			return (_Node*)k_source;
+		}
+
+		// _Node must inherit from Node
+		// use it only if you are sure of the type
+		template <class _Node>
+		std::enable_if_t<std::is_base_of_v<Node, _Node>, _Node>* target() const
+		{
+			return (_Node*)k_target;
+		}
+	};
+
+}

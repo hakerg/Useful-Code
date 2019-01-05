@@ -1,18 +1,25 @@
 #pragma once
-#include "TimeDependent.h"
-class AnimationLinear :
-	public TimeDependent
+#include "TimeLimited.h"
+
+namespace uc
 {
-public:
 
-	double change_speed_per_second;
-	double & value;
-	std::chrono::duration<double> remaining_time;
+	// makes an animation by modifying continuously given external value
+	class AnimationLinear :
+		public TimeLimited
+	{
 
-	AnimationLinear(double & _value, double _change_speed_per_second, std::chrono::duration<double> _total_time);
-	virtual ~AnimationLinear();
+		bool _add_time(std::chrono::duration<double> delta_time) override;
 
-	// Odziedziczono za poœrednictwem elementu ContinuousValueChanger
-	virtual bool add_time(std::chrono::duration<double> delta_time) override;
-};
+	public:
 
+		double change_speed_per_second;
+		double & value;
+
+		template <class _Rep, class _Period>
+		AnimationLinear(double & value_, double change_speed_per_second_, std::chrono::duration<_Rep, _Period> time_) :
+			value(value_), change_speed_per_second(change_speed_per_second_), TimeLimited(std::chrono::duration_cast<std::chrono::duration<double>>(time_)) {}
+		virtual ~AnimationLinear();
+	};
+
+}

@@ -1,55 +1,65 @@
 #pragma once
 #include <cmath>
 #include "Figure2D.h"
+#include "Rectangle.h"
 #include "Vector2D.h"
 
-template <class _Numeric> class Square :
-	public Figure2D<_Numeric>
+namespace uc
 {
-public:
 
-	Vector2D<_Numeric> center;
-	_Numeric half_side;
+	// be careful about constructor parameters
+	template <class _Numeric> class Square :
+		public Figure2D<_Numeric>
+	{
+	public:
+
+		Vector2D<_Numeric> center;
+		_Numeric side;
 
 
-	Square(const Vector2D<_Numeric> & _center, _Numeric _half_side) : center(_center), half_side(_half_side) {}
-	virtual ~Square() {}
+		// center - the center of the square / point where diagonals cross
+		// half_size - vector pointed from center to the edge
+		Square(const Vector2D<_Numeric> & center_, _Numeric side_) : center(center_), side(side_) {}
+		virtual ~Square() {}
 
-	Vector2D<_Numeric> top_left() const
-	{
-		return Vector2D<_Numeric>(center.x - half_side, center.y - half_side);
-	}
+		Vector2D<double> top_left() const
+		{
+			return { center.x - side * 0.5, center.y - side * 0.5 };
+		}
 
-	Vector2D<_Numeric> bottom_right() const
-	{
-		return Vector2D<_Numeric>(center.x + half_side, center.y + half_side);
-	}
+		Vector2D<double> bottom_right() const
+		{
+			return { center.x + side * 0.5, center.y + side * 0.5 };
+		}
 
-	_Numeric side() const
-	{
-		return 2 * half_side;
-	}
+		// excluding border
+		bool inside(const Vector2D<_Numeric>& point) const override
+		{
+			return abs(point.x - center.x) * 2 < side && abs(point.y - center.y) * 2 < side;
+		}
+		bool on_border(const Vector2D<_Numeric>& point) const override
+		{
+			return abs(point.x - center.x) * 2 == side && abs(point.y - center.y) * 2 == side;
+		}
 
-	// Odziedziczono za poœrednictwem elementu Shape2D
-	virtual bool inside(const Vector2D<_Numeric>& point) const override
-	{
-		return abs(point.x - center.x) < half_side && abs(point.y - center.y) < half_side;
-	}
-	virtual bool on_border(const Vector2D<_Numeric>& point) const override
-	{
-		return abs(point.x - center.x) == half_side && abs(point.y - center.y) == half_side;
-	}
-	virtual bool over(const Vector2D<_Numeric>& point) const override
-	{
-		return abs(point.x - center.x) <= half_side && abs(point.y - center.y) <= half_side;
-	}
-	virtual _Numeric area() const override
-	{
-		return half_side * half_side * 4;
-	}
-	virtual _Numeric circumference() const override
-	{
-		return half_side * 8;
-	}
-};
+		// including border
+		bool over(const Vector2D<_Numeric>& point) const override
+		{
+			return abs(point.x - center.x) * 2 <= side && abs(point.y - center.y) * 2 <= side;
+		}
+		_Numeric area() const override
+		{
+			return side * side;
+		}
+		_Numeric circumference() const override
+		{
+			return side * 4;
+		}
 
+		Rectangle<_Numeric> rectange() const
+		{
+			return { center, {side, side} };
+		}
+	};
+
+}

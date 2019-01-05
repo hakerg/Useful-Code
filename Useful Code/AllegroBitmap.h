@@ -1,25 +1,20 @@
 #pragma once
 #include <allegro5\allegro.h>
-#include "Image.h"
 #include "Vector2D.h"
 
-class AllegroBitmap :
-	public Image
+namespace uc
 {
-	// Odziedziczono za poœrednictwem elementu Image
-	virtual void _draw(DrawTarget * target, float alpha) const override;
 
-	virtual void _set_target() const override;
+	class AllegroBitmap
+	{
+	public:
 
-public:
+		ALLEGRO_BITMAP * const k_bitmap;
 
-	ALLEGRO_BITMAP * const k_bitmap;
-	Vector2D<float> position;
+		AllegroBitmap(const Vector2D<unsigned>& size_);
+		virtual ~AllegroBitmap();
 
-	AllegroBitmap(const Vector2D<unsigned>& _size);
-	virtual ~AllegroBitmap();
+		Vector2D<unsigned> size() const;
+	};
 
-	// Odziedziczono za poœrednictwem elementu Image
-	virtual Vector2D<unsigned> size() const override;
-};
-
+}

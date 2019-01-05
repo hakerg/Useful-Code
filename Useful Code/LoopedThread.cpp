@@ -1,25 +1,28 @@
 #include "LoopedThread.h"
 
-
-
-LoopedThread::~LoopedThread()
+namespace uc
 {
-	stop();
-}
 
-void LoopedThread::request_stop()
-{
-	running = false;
-}
+	LoopedThread::~LoopedThread()
+	{
+		stop();
+	}
 
-void LoopedThread::stop()
-{
-	running = false;
-	wait_until_finished();
-}
+	void LoopedThread::request_stop()
+	{
+		running = false;
+	}
+
+	void LoopedThread::stop()
+	{
+		running = false;
+		wait_until_finished();
+	}
 
 
-void LoopedThread::wait_until_finished()
-{
-	if (_thread.joinable()) _thread.join();
+	void LoopedThread::wait_until_finished()
+	{
+		if (_thread.joinable()) _thread.join();
+	}
+
 }

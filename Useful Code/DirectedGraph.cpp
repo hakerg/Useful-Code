@@ -1,9 +1,14 @@
 #include "DirectedGraph.h"
 
-DirectedGraph::DirectedGraph()
+namespace uc
 {
-}
 
-DirectedGraph::~DirectedGraph()
-{
+	DirectedGraph::DirectedGraph()
+	{
+	}
+
+	DirectedGraph::~DirectedGraph()
+	{
+	}
+
 }

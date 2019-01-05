@@ -1,20 +1,23 @@
 #include "AnimationExponential.h"
 #include <cmath>
 
-
-
-AnimationExponential::AnimationExponential(double & _value, double _factor, double _target_value)
-	: value(_value), factor(_factor), target_value(_target_value)
+namespace uc
 {
-}
+
+	AnimationExponential::AnimationExponential(double & value_, double factor_, double target_)
+		: value(value_), factor(factor_), target(target_)
+	{
+	}
 
 
-AnimationExponential::~AnimationExponential()
-{
-}
+	AnimationExponential::~AnimationExponential()
+	{
+	}
 
-bool AnimationExponential::add_time(std::chrono::duration<double> delta_time)
-{
-	value = target_value + (value - target_value) * exp(-delta_time.count() * factor);
-	return true;
+	bool AnimationExponential::add_time(std::chrono::duration<double> delta_time)
+	{
+		value = target + (value - target) * exp(-delta_time.count() * factor);
+		return true;
+	}
+
 }

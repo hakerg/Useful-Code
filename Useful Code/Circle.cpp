@@ -1,17 +1,44 @@
 #include "Circle.h"
+#include <cmath>
 
-Circle::Circle(const Vector2D<double>& _center, double _radius) : center(_center), radius(_radius) {}
+namespace uc
+{
 
-Circle::~Circle() {}
+	Circle::Circle(const Vector2D<double>& center_, double radius_) : center(center_), radius(radius_) {}
 
-// Odziedziczono za poœrednictwem elementu Shape2D
+	Circle::Circle(const Vector2D<double>& p1_, const Vector2D<double>& p2_, const Vector2D<double>& p3_) : center(0.0, 0.0), radius(0.0)
+	{
 
-bool Circle::inside(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() < radius; }
+		double divider = 2.0 * (p1_.y * p3_.x - p1_.y * p2_.x + p2_.y * p1_.x - p2_.y * p3_.x + p3_.y * p2_.x - p3_.y * p1_.x);
 
-bool Circle::on_border(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() == radius; }
+		center.x = (
+			p3_.y * (p2_.x * p2_.x + p2_.y * p2_.y - p1_.x * p1_.x - p1_.y * p1_.y) +
+			p2_.y * (p1_.x * p1_.x + p1_.y * p1_.y - p3_.x * p3_.x - p3_.y * p3_.y) +
+			p1_.y * (p3_.x * p3_.x + p3_.y * p3_.y - p2_.x * p2_.x - p2_.y * p2_.y)
+			) / divider;
 
-bool Circle::over(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() <= radius; }
+		center.y = (
+			p3_.x * (p1_.x * p1_.x + p1_.y * p1_.y - p2_.x * p2_.x - p2_.y * p2_.y) +
+			p2_.x * (p3_.x * p3_.x + p3_.y * p3_.y - p1_.x * p1_.x - p1_.y * p1_.y) +
+			p1_.x * (p2_.x * p2_.x + p2_.y * p2_.y - p3_.x * p3_.x - p3_.y * p3_.y)
+			) / divider;
 
-double Circle::area() const { return PI * radius * radius; }
+		radius = cbrt(Vector2D<double>(center, p1_).length() * Vector2D<double>(center, p2_).length() * Vector2D<double>(center, p3_).length());
 
-double Circle::circumference() const { return _2PI * radius; }
+	}
+
+	Circle::~Circle() {}
+
+	// Odziedziczono za poœrednictwem elementu Shape2D
+
+	bool Circle::inside(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() < radius; }
+
+	bool Circle::on_border(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() == radius; }
+
+	bool Circle::over(const Vector2D<double>& point) const { return Vector2D<double>(center, point).length() <= radius; }
+
+	double Circle::area() const { return PI * radius * radius; }
+
+	double Circle::circumference() const { return _2PI * radius; }
+
+}

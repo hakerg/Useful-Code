@@ -1,11 +1,14 @@
 #include "Connection.h"
 
-
-
-Connection::Connection(Node * _source, Node * _target) : k_source(_source), k_target(_target)
+namespace uc
 {
-}
 
-Connection::~Connection()
-{
+	Connection::Connection(Node * source_, Node * target_) : k_source(source_), k_target(target_)
+	{
+	}
+
+	Connection::~Connection()
+	{
+	}
+
 }
